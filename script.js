@@ -3,7 +3,23 @@ const title = document.querySelector("#title");
 const textArea = document.querySelector("#note-text");
 const button = document.querySelector(".note-btn");
 button.addEventListener("click", function (e) {
+    
     let notes = localStorage.getItem("notes");
+    if (title.value === "" && textArea.value == "") {
+        responseDiv.innerHTML = "No Response. Both Teacher Name and Batch Time are required.";
+        responseDiv.style.color = "red";
+        return; 
+    }
+    if (title.value === "") {
+        responseDiv.innerHTML = "No Response.Batch Time is required.";
+        responseDiv.style.color = "red";
+        return; 
+    }
+    if (textArea.value == "") {
+        responseDiv.innerHTML = "No Response. Teacher Name is required.";
+        responseDiv.style.color = "red";
+        return; 
+    }
     if (notes == null) {
         notesObj = [];
     } else {
@@ -82,3 +98,13 @@ searchTxt.addEventListener("input", function () {
         }
     })
 })
+title.addEventListener("input", function () {
+    if (title.value !== "" && textArea.value !== "") {
+        responseDiv.innerHTML = ""; 
+    }
+});
+textArea.addEventListener("input", function () {
+    if (title.value !== "" && textArea.value !== "") {
+        responseDiv.innerHTML = ""; 
+    }
+});
